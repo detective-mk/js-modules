@@ -39,7 +39,6 @@ export class Tab {
     this.tabBtnElms.forEach((element) => {
       element.addEventListener("click", () => {
         this.reset();
-        console.log(`${element}が押されました`);
         element.classList.add(this.options.active);
         const tabNum = element.dataset.tabTrigger;
 
