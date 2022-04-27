@@ -22,19 +22,25 @@ export class Tab {
     this.activate();
   }
 
+  /**
+   * タブの状態をリセット
+   */
   reset() {
-    this.tabBtnElms.forEach((element) => {
-      if (element.classList.contains(this.options.active)) {
-        element.classList.remove(this.options.active);
+    for (const tabBtn of this.tabBtnElms) {
+      if (tabBtn.classList.contains(this.options.active)) {
+        tabBtn.classList.remove(this.options.active);
       }
-    });
-    this.tabContElms.forEach((element) => {
-      if (element.classList.contains(this.options.open)) {
-        element.classList.remove(this.options.open);
+    }
+    for (const tabCont of this.tabContElms) {
+      if (tabCont.classList.contains(this.options.open)) {
+        tabCont.classList.remove(this.options.open);
       }
-    });
+    }
   }
 
+  /**
+   * タブを活性化
+   */
   activate() {
     this.tabBtnElms.forEach((element) => {
       element.addEventListener("click", () => {
@@ -44,17 +50,29 @@ export class Tab {
 
         this.tabContElms[tabNum - 1].classList.add(this.options.open);
 
-        this.tabContElms.forEach((element) => {
+        // this.tabContElms.forEach((element) => {
+        //   if (
+        //     element.dataset.tabCont === tabNum &&
+        //     element.classList.contains(this.options.hidden)
+        //   ) {
+        //     element.classList.remove(this.options.hidden);
+        //     element.classList.add(this.options.open);
+        //   } else {
+        //     element.classList.add(this.options.hidden);
+        //   }
+        // });
+
+        for (const tabContElm of this.tabContElms) {
           if (
-            element.dataset.tabCont === tabNum &&
-            element.classList.contains(this.options.hidden)
+            tabContElm.dataset.tabCont === tabNum &&
+            tabContElm.classList.contains(this.options.hidden)
           ) {
-            element.classList.remove(this.options.hidden);
-            element.classList.add(this.options.open);
+            tabContElm.classList.remove(this.options.hidden);
+            tabContElm.classList.add(this.options.open);
           } else {
-            element.classList.add(this.options.hidden);
+            tabContElm.classList.add(this.options.hidden);
           }
-        });
+        }
       });
     });
   }
