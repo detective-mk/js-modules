@@ -15,6 +15,12 @@ main {
   margin: 100px auto;
 }
 
+.hdg-lv2 {
+  margin: 50px 0;
+}
+
+// tab
+//-------------------------
 .tab {
   margin-top: 100px;
 
@@ -53,4 +59,89 @@ main {
 
 .is-hidden {
   display: none;
+}
+
+// accordion
+//-------------------------
+
+.accordion-wrap {
+  margin-bottom: 100px;
+
+  .accordion:first-child {
+    border-top: 1px solid #b9b9b9;
+  }
+}
+
+.accordion {
+  $_this: &;
+
+  &__mark {
+    color: #266aad;
+    font-size: 24px;
+    margin-right: 20px;
+  }
+
+  &__btn {
+    position: relative;
+
+    padding: 30px 20px;
+    width: 100%;
+    font-weight: bold;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 1px solid #b9b9b9;
+
+    &:hover,
+    &:focus {
+      background-color: #f5f5f5;
+    }
+
+    // 右端のトグルマーク
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      top: 50%;
+      right: 20px;
+      background-color: #707070;
+      transition: transform 0.1s;
+    }
+
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__content {
+    padding: 30px 20px;
+    border-bottom: 1px solid #b9b9b9;
+    background-color: #fff;
+  }
+
+  // JS有効時の接頭辞を付与すること。
+  &__content {
+    display: none;
+  }
+
+  &.is-active {
+    #{$_this}__btn {
+      background-color: #f0f8fe;
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    #{$_this}__content {
+      display: block;
+    }
+  }
 }
